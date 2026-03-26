@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Event Manager – Home</title>
+    <link rel="stylesheet" href="/main.css" />
+    <script src="/script.js"></script>
+  </head>
+  <body>
+    <!-- include site wide navigation bar -->
+    <%- include('common/header') %>
+
+    <main class="middle">
+      <div class="home-card-container">
+        <!-- Organiser card -->
+        <a class="home-card-1" href="/organiser">
+          <h3 class="home-card-org-title">Organiser Home Page</h3>
+          <p style="color: #474747">
+            Create events, set ticket prices and view bookings.
+          </p>
+        </a>
+        <!-- Attendee card -->
+        <a class="home-card-2" href="/attendee">
+          <h3 class="home-card-att-title">Attendee Home Page</h3>
+          <p style="color: #474747">
+            See upcoming events and reserve your tickets.
+          </p>
+        </a>
+      </div>
+
+      <!-- description -->
+      <div class="home-desc">
+        <p>Make your next event a success with Event Manager!</p>
+      </div>
+    </main>
+  </body>
+</html>

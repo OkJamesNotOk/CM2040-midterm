@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Event Manager – Organiser Home Page</title>
+    <link rel="stylesheet" href="/main.css" />
+    <script src="/script.js"></script>
+  </head>
+  <body>
+    <%- include('common/header') %>
+    <main class="middle">
+      <h1>Organiser Home Page</h1>
+      <!-- Site settings -->
+      <h2>Change Site Settings</h2>
+      <form action="/organiser/site_setting" method="GET">
+        <button type="submit">Change Site Setting</button>
+      </form>
+
+      <!-- Events from current organiser -->
+      <h2>Events</h2>
+      <form action="/organiser/add" method="GET">
+        <button type="submit">Create New Event</button>
+      </form>
+
+      <div class="card-list">
+        <!-- display if there is no events -->
+        <% if (events.length == 0) { %>
+        <p>No events scheduled yet.</p>
+        <% } else { events.forEach(ev => { %>
+        <div class="card">
+          <!--  title and description -->
+          <div class="card-header">
+            <div class="card-title">Title: <%= ev.event_title %></div>
+            <div class="card-desc"><%= ev.event_description %></div>
+          </div>
+
+          <!-- details -->
+          <div class="card-details">
+            <!-- date and time -->
+            <div><strong>Created:</strong> <%= ev.created_at %></div>
+            <div><strong>Last modified:</strong> <%= ev.updated_at %></div>
+            <div><strong>Date:</strong> <%= ev.event_date %></div>
+            <div><strong>Time:</strong> <%= ev.event_time %></div>
+            <!-- prices and capacity-->
+            <div><strong>Price:</strong> $<%= ev.ticket_price_1 %></div>
+            <div>
+              <strong>Concession Price:</strong> $<%= ev.ticket_price_2 %>
+            </div>
+            <div>
+              <strong>Tickets:</strong> sold <%= ev.sold_1 %> / <%=
+              ev.capacity_ticket_1 %>
+            </div>
+            <div><strong>Available:</strong> <%= ev.available_1 %></div>
+
+            <div>
+              <strong>Concession Tickets:</strong> sold <%= ev.sold_2 %> / <%=
+              ev.capacity_ticket_2 %>
+            </div>
+            <div><strong>Available:</strong> <%= ev.available_2 %></div>
+            <!-- display status -->
+            <div>
+              <strong>Display:</strong> <%= ev.display_status ? "Yes" : "No" %>
+            </div>
+          </div>
+
+          <!-- buttons -->
+          <div class="button-container">
+            <form
+              action="/organiser/edit/<%= ev.id %>"
+              method="GET"
+              style="display: inline"
+            >
+              <button>Edit</button>
+            </form>
+            <form
+              action="/organiser/delete/<%= ev.id %>"
+              method="POST"
+              style="display: inline"
+            >
+              <button onclick="return confirm('Are you sure?')">Delete</button>
+            </form>
+            <form
+              action="/organiser/view_bookings/<%= ev.id %>"
+              method="GET"
+              style="display: inline"
+            >
+              <button type="submit">Bookings</button>
+            </form>
+
+            <!-- link to the Attendee Event Page -->
+            <form
+              action="/attendee/book/<%= ev.id %>"
+              method="GET"
+              style="display: inline"
+            >
+              <button type="submit">Go to Book</button>
+            </form>
+          </div>
+        </div>
+        <% }) } %>
+      </div>
+
+      <!-- logout organiser -->
+      <form action="/logout" method="POST">
+        <button type="submit">Log out</button>
+      </form>
+    </main>
+  </body>
+</html>

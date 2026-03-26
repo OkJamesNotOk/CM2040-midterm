@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Booking Confirmed – Event Manager</title>
+    <link rel="stylesheet" href="/main.css" />
+  </head>
+  <body>
+    <!-- include site wide navigation bar -->
+    <%- include('common/header') %>
+
+    <!-- Confirm succesful booking -->
+    <main class="middle">
+      <h2>Booking Successful!</h2>
+      <p>Thank you, <strong><%= name %></strong>!</p>
+      <p>Your booking has been confirmed.</p>
+      <p>We look forward to seeing you at your selected timeslot.</p>
+      <a href="/">Return to Home</a>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= siteName %> – Book Tickets</title>
+    <link rel="stylesheet" href="/main.css" />
+    <script src="/script.js"></script>
+  </head>
+  <body>
+    <!-- include global navigation bar -->
+    <%- include('common/header') %>
+
+    <!-- alerts -->
+    <% if (alert && alert.length) { alert.forEach(err => { %>
+    <div class="alert" role="alert">
+      <%= err.msg %>
+      <button type="button" class="close"><span>&times;</span></button>
+    </div>
+    <% }) } %>
+
+    <main class="middle">
+      <h1>Attendee Event Page</h1>
+
+      <div class="card-list">
+        <div class="card">
+          <!-- event title and description -->
+          <div class="card-header">
+            <div class="card-title"><%= thisEvent.event_title %></div>
+            <div class="card-desc"><%= thisEvent.event_description %></div>
+          </div>
+
+          <!-- event details -->
+          <div class="card-details">
+            <div><strong>Created:</strong><%= thisEvent.created_at %></div>
+            <div>
+              <strong>Last modified:</strong> <%= thisEvent.updated_at %>
+            </div>
+            <div><strong>Date:</strong> <%= thisEvent.event_date %></div>
+            <div><strong>Time:</strong> <%= thisEvent.event_time %></div>
+            <!-- full price ticket -->
+            <div><strong>Price:</strong> $<%= thisEvent.ticket_price_1 %></div>
+            <div>
+              <strong>Tickets:</strong>
+              <%= thisEvent.avail_1 %> available
+            </div>
+            <!-- concession ticket -->
+            <div>
+              <strong>Concession Price:</strong> $<%= thisEvent.ticket_price_2
+              %>
+            </div>
+            <div>
+              <strong>Concession Tickets:</strong>
+              <%= thisEvent.avail_2 %> available
+            </div>
+            <!-- organiser of the event -->
+            <div><strong>Organiser:</strong> <%= thisEvent.site_name %></div>
+          </div>
+        </div>
+      </div>
+
+      <h2>
+        Book Tickets – <%= thisEvent.event_title %><br />
+        <small><%= thisEvent.event_date %> @ <%= thisEvent.event_time %></small>
+      </h2>
+
+      <!-- booking form -->
+      <form
+        action="/attendee/submit_book"
+        id="bookingForm"
+        method="POST"
+        class="vertical-form"
+        data-price1="<%= thisEvent.ticket_price_1 %>"
+        data-price2="<%= thisEvent.ticket_price_2 %>"
+      >
+        <input type="hidden" name="event_id" value="<%= thisEvent.id %>" />
+        <!-- attendee name -->
+        <label>Name:</label>
+        <input
+          type="text"
+          name="customer_name"
+          value="<%= old?.name  || '' %>"
+          required
+        />
+
+        <!-- ticket quantities -->
+        <label>Tickets ($<%= thisEvent.ticket_price_1 %> each):</label>
+        <input
+          type="number"
+          name="ticket_qty_1"
+          id="qty1"
+          min="0"
+          value="<%= old?.ticket_qty_1 || 0 %>"
+          onchange="updateTotal()"
+          oninput="updateTotal()"
+        />
+
+        <label
+          >Concession Tickets ($<%= thisEvent.ticket_price_2 %> each):</label
+        >
+        <input
+          type="number"
+          name="ticket_qty_2"
+          id="qty2"
+          min="0"
+          value="<%= old?.ticket_qty_2 || 0 %>"
+          onchange="updateTotal()"
+          oninput="updateTotal()"
+        />
+
+        <!-- total cost -->
+        <p id="total"><strong>Total: $0.00</strong></p>
+
+        <button type="submit">Confirm Booking</button>
+      </form>
+      <form action="/attendee">
+        <button>Back To Attendee Home</button>
+      </form>
+    </main>
+  </body>
+</html>

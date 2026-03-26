@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit Event – <%= siteName %></title>
+    <link rel="stylesheet" href="/main.css" />
+  </head>
+  <body>
+    <!-- include site wide navigation bar -->
+    <%- include('common/header') %>
+
+    <main class="middle">
+      <h2>Edit Scheduled Event</h2>
+
+      <form
+        action="/organiser/edit/<%= event.id %>"
+        method="POST"
+        class="form-container edit-event"
+      >
+        <!-- date and time -->
+        <label for="event_date">Date:</label>
+        <input
+          type="date"
+          id="event_date"
+          name="event_date"
+          value="<%= event.event_date %>"
+          required
+        />
+
+        <label for="event_time">Time:</label>
+        <input
+          type="time"
+          id="event_time"
+          name="event_time"
+          value="<%= event.event_time %>"
+          required
+        />
+
+        <!-- title and description -->
+        <label for="event_title">Title:</label>
+        <input
+          type="text"
+          id="event_title"
+          name="event_title"
+          value="<%= event.event_title %>"
+          required
+        />
+
+        <label for="event_description">Description:</label>
+        <textarea
+          id="event_description"
+          name="event_description"
+          rows="3"
+          required
+        >
+<%= event.event_description %></textarea
+        >
+
+        <!-- ticket prices -->
+        <label for="ticket_price_1">Ticket Price:</label>
+        <input
+          type="number"
+          id="ticket_price_1"
+          name="ticket_price_1"
+          step="0.01"
+          min="0"
+          value="<%= event.ticket_price_1 %>"
+          required
+        />
+
+        <label for="ticket_price_2">Concession Ticket Price:</label>
+        <input
+          type="number"
+          id="ticket_price_2"
+          name="ticket_price_2"
+          step="0.01"
+          min="0"
+          value="<%= event.ticket_price_2 %>"
+          required
+        />
+
+        <!-- ticket capacities -->
+        <label for="capacity_ticket_1">Ticket Capacity:</label>
+        <input
+          type="number"
+          id="capacity_ticket_1"
+          name="capacity_ticket_1"
+          min="1"
+          value="<%= event.capacity_ticket_1 %>"
+          required
+        />
+
+        <label for="capacity_ticket_2">Concession Ticket Capacity:</label>
+        <input
+          type="number"
+          id="capacity_ticket_2"
+          name="capacity_ticket_2"
+          min="0"
+          value="<%= event.capacity_ticket_2 %>"
+          required
+        />
+
+        <!-- display toggle -->
+        <label class="inline">
+          <input type="checkbox" name="display_status" value="1" <%=
+          event.display_status ? "checked" : "" %> /> Display publicly
+        </label>
+
+        <button type="submit">Update Event</button>
+      </form>
+
+      <br />
+      <a href="/organiser">Back to dashboard</a>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= siteName %> – Bookings</title>
+    <link rel="stylesheet" href="/main.css" />
+  </head>
+  <body>
+    <!-- include site wide navigation bar -->
+    <%- include('common/header') %>
+
+    <!-- display customers and number tickets bought in tables -->
+    <main class="middle">
+      <h2>
+        Bookings for "<%= event.event_title %>" – <%= event.event_date %> at <%=
+        event.event_time %>
+      </h2>
+
+      <p><strong>Description:</strong> <%= event.event_description %></p>
+      <p>
+        <strong>Price:</strong>
+        $<%= event.ticket_price_1 %> |
+        <strong>Concession Price:</strong>
+        $<%= event.ticket_price_2 %>
+      </p>
+
+      <% if (!bookings.length) { %>
+      <p>No bookings for this event yet.</p>
+      <% } else { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Customer Name</th>
+            <th>Ticket</th>
+            <th>Concession Ticket</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% bookings.forEach(bk => { %>
+          <tr>
+            <td><%= bk.customer_name %></td>
+            <td><%= bk.ticket_qty_1 %></td>
+            <td><%= bk.ticket_qty_2 %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+
+      <br />
+      <a href="/organiser" class="button">Back to Dashboard</a>
+    </main>
+  </body>
+</html>

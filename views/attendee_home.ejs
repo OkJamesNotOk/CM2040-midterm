@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= siteName %> – Events</title>
+    <link rel="stylesheet" href="/main.css" />
+    <script src="/script.js"></script>
+  </head>
+  <body>
+    <!-- include global navigation bar -->
+    <%- include('common/header') %>
+
+    <main class="middle">
+      <h1>Attendee Home Page</h1>
+      <h2>Available Events</h2>
+
+      <!-- list of events -->
+      <div class="card-list">
+        <!-- display if no published events -->
+        <% if (!events || events.length == 0) { %>
+        <p>No public events at the moment.</p>
+        <% } else { events.forEach(ev => { %>
+
+        <!-- each event -->
+        <div class="card">
+          <!-- event titles and description -->
+          <div class="card-header">
+            <div class="card-title"><%= ev.event_title %></div>
+            <div class="card-desc"><%= ev.event_description %></div>
+          </div>
+
+          <!-- event details -->
+          <div class="card-details">
+            <!-- date time -->
+            <div><strong>Created:</strong><%= ev.created_at %></div>
+            <div><strong>Last modified:</strong> <%= ev.updated_at %></div>
+            <div><strong>Date:</strong> <%= ev.event_date %></div>
+            <div><strong>Time:</strong> <%= ev.event_time %></div>
+            <!-- full pricce tickets -->
+            <div><strong>Price:</strong> $<%= ev.ticket_price_1 %></div>
+            <div>
+              <strong>Tickets:</strong>
+              <%= ev.avail_1 %> available
+            </div>
+            <!-- concession tickets -->
+            <div>
+              <strong>Concession Price:</strong> $<%= ev.ticket_price_2 %>
+            </div>
+            <div>
+              <strong>Concession Tickets:</strong>
+              <%= ev.avail_2 %> available
+            </div>
+            <!-- organiser of the event -->
+            <div><strong>Organiser:</strong> <%= ev.site_name %></div>
+          </div>
+
+          <!-- move to selected event bnooking page -->
+          <div class="button-container">
+            <form action="/attendee/book/<%= ev.id %>" method="GET">
+              <button type="submit">Book tickets</button>
+            </form>
+          </div>
+        </div>
+        <% }) } %>
+      </div>
+    </main>
+  </body>
+</html>

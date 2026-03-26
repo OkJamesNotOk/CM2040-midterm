@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Event Manager – Organiser Sign Up</title>
+    <link rel="stylesheet" href="/main.css" />
+    <script src="/script.js"></script>
+  </head>
+  <body>
+    <!-- include site wide navigation bar -->
+    <%- include('common/header') %>
+
+    <main class="middle">
+      <!-- alerts -->
+      <% if (typeof alert !== 'undefined' && alert.length) { %> <%
+      alert.forEach(error => { %>
+      <div class="alert" role="alert">
+        <%= error.msg %>
+        <button type="button" class="close"><span>&times;</span></button>
+      </div>
+      <% }) %> <% } %>
+
+      <h2>Create an Organiser Account</h2>
+
+      <!-- sign up form -->
+      <form action="/signup_organiser" method="POST" class="vertical-form">
+        <!-- username -->
+        <label for="username">Username:</label><br />
+        <input type="text" id="username" name="username" required /><br />
+
+        <!-- password -->
+        <label for="password">Password:</label><br />
+        <input type="password" id="password" name="password" required /><br />
+
+        <!-- Site name -->
+        <label for="site_name">Site Name:</label><br />
+        <input type="text" id="site_name" name="site_name" required />
+
+        <!-- site description -->
+        <label for="site_description">Site Description:</label><br />
+        <textarea
+          id="site_description"
+          name="site_description"
+          rows="3"
+          required
+        ></textarea>
+
+        <br /><br />
+
+        <button type="submit">Sign Up</button>
+      </form>
+
+      <!-- log in page -->
+      <p>Already an organiser?</p>
+      <form action="/login_organiser" method="GET">
+        <button type="submit">Log in</button>
+      </form>
+    </main>
+  </body>
+</html>

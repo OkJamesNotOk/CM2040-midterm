@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit Site Settings for Event Manager</title>
+    <link rel="stylesheet" href="/main.css" />
+  </head>
+  <body>
+    <!-- include site wide navigation bar -->
+    <%- include('common/header') %>
+    <main class="middle">
+      <h2>Update Site Settings</h2>
+
+      <!-- site setting form -->
+      <form action="/organiser/site_setting" method="POST">
+        <div class="vertical-form">
+          <label for="site_name">Site Name:</label>
+          <input
+            type="text"
+            name="site_name"
+            id="site_name"
+            value="<%= site.site_name %>"
+            required
+          />
+        </div>
+        <div class="vertical-form">
+          <label for="description">Site Description:</label>
+          <textarea name="description" id="description" rows="3" required>
+<%= site.description %></textarea
+          >
+        </div>
+        <!-- submit changes -->
+        <button type="submit">Update Settings</button>
+      </form>
+
+      <br />
+      <!-- go back to organiser home page -->
+      <form action="/organiser">
+        <button type="submit">Back to Organiser Home</button>
+      </form>
+    </main>
+  </body>
+</html>
