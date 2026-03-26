@@ -1,5 +1,7 @@
 Midterm Project for CM2040 Databases, Networks and the Web
 
+Grade 82%
+
 Additional Libraries:
 
 - express-validator – for request body validation
