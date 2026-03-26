@@ -1,3 +1,5 @@
+Midterm Project for CM2040 Databases, Networks and the Web
+
 Additional Libraries:
 
 - express-validator – for request body validation
